@@ -38,6 +38,11 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         MESSAGE: "Build: ({sha}) {msg}" # The commit message
 
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: './docs/build/html'
+
   deploy:
     needs: build
     environment:
