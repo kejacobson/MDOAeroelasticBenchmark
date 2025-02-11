@@ -18,13 +18,7 @@ release = '0.0.1'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "nbsphinx",
-    "sphinx.ext.mathjax",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.autodoc",
-    "sphinx.ext.viewcode",
-    "sphinxcontrib.bibtex",
-    "sphinxcontrib.programoutput",
+    "sphinxcontrib.bibtex"
 ]
 
 templates_path = ['_templates']
