@@ -2,10 +2,12 @@
 Aeroelastic Optimization Benchmark
 ==================================
 
-This document describes the benchmark model and optimization problems to be used by working group 1 for the special session on High-Fidelity Aeroelastic Design Optimization Applications and Benchmarks at the 2025 AIAA SciTech Forum.
+This website describes the benchmark model and optimization problems to be used by working group 1 for the special session on High-Fidelity Aeroelastic Design Optimization Applications and Benchmarks at the 2025 AIAA SciTech Forum.
 These were first proposed in our paper at the 2024 AIAA SciTech Forum :cite:t:`AGray2024a`.
-This document contains the model and problem description sections of that paper, with some small changes.
+
+This website contains the model and problem description sections of that paper, with some small changes.
 It should be considered the up to date reference for those planning to take part in the special session.
+
 
 Wing Model 
 ----------
@@ -248,42 +250,53 @@ The three problems build on one another with the intention of allowing researche
 
 .. \input{\tablepath/AircraftSpec.tex}
 
-.. list-table:: Aircraft and mission specifications, based on the Boeing 717 high gross-weight variant.
+.. table:: Aircraft and mission specifications, based on the Boeing 717 high gross-weight variant.
    :name: tabAircraftSpec
 
-   * - ..
-     - **Quantity**
-     - **Description**
-     - **Value**
-  
-   * - **Baseline wing geometry**
-     - ..
-     - ..
-     - ..
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | **Quantity**                          | **Description**                                       |  **Value**                                 |
+   +===========================================+=======================================+=======================================================+============================================+
+   |  **Baseline wing geometry**               |                                       |                                                       |                                            |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`b`                             | Semispan                                              | :math:`14\,\text{m}`                       |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`C_\text{root}`                 | Root chord                                            | :math:`5\,\text{m}`                        |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`C_\text{tip}`                  | Tip chord                                             | :math:`1.5\,\text{m}`                      |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`S`                             | Planform area (single wing)                           | :math:`45.5\,\text{m}^2`                   |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`\text{MAC}`                    | Mean aerodynamic chord                                | :math:`3.56\,\text{m}`                     |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |  **Masses**                               |                                       |                                                       |                                            |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`M_\text{payload}`              | Payload mass                                          | :math:`14.5e3\,\text{kg}`                  |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`M_\text{frame}`                | Operating empty mass (minus wing)                     | :math:`25e3\,\text{kg}`                    |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`M_\text{fuel, res}`            | Reserve fuel mass                                     | :math:`2e3\,\text{kg}`                     |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |  **Fuelburn calculation parameters**      |                                       |                                                       |                                            |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`R`                             | Nominal range                                         | :math:`3815\,\text{km}`                    |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`R_\text{climb}`                | Climb segment range                                   | :math:`290\,\text{km}`                     |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`V_\text{climb}`                | Average climb speed                                   | :math:`350\,\text{mph}`                    |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`C_{D,\text{frame}}`            | Airframe drag coefficient (fuselage + tail + nacelle) | :math:`0.01508`                            |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`k_\text{tank}`                 | Assumed fraction of wingbox that can store fuel       | :math:`0.85`                               |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`V_\text{aux}`                  | Auxilliary fuel tank volume                           | :math:`2.763\,\text{m}^{3}`                |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`\text{TSFC}`                   | Thrust specific fuel consumption                      | :math:`18e-6\,\text{kg}/\text{N\,s}`       |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
+   |                                           | :math:`\rho_\text{fuel}`              | Fuel density                                          | :math:`804\,\text{kg}/\text{m}^3`          |
+   +-------------------------------------------+---------------------------------------+-------------------------------------------------------+--------------------------------------------+
 
-..                                              & \multicolumn{1}{c}{\textbf{Quantity}} & \multicolumn{1}{c}{\textbf{Description}}              & \multicolumn{1}{c}{\textbf{Value}}         \\ \cline{2-4}
-..  \textbf{Baseline wing geometry}          &                                       &                                                       &                                            \\
-..                                           & $b$                                   & Semispan                                              & \SI{14}{\metre}                            \\
-..                                           & $C_\text{root}$                       & Root chord                                            & \SI{5}{\metre}                             \\
-..                                           & $C_\text{tip}$                        & Tip chord                                             & \SI{1.5}{\metre}                           \\
-..                                           & $S$                                   & Planform area (single wing)                           & \SI{45.5}{\metre\squared}                  \\
-..                                           & $\text{MAC}$                          & Mean aerodynamic chord                                & \SI{3.56}{\metre}                          \\
-..  \textbf{Masses}                          &                                       & \textbf{}                                             & \multicolumn{1}{l}{\textbf{}}              \\
-..                                           & $M_\text{payload}$                    & Payload mass                                          & \SI{14.5e3}{\kilo\gram}                    \\
-..                                           & $M_\text{frame}$                      & Operating empty mass (minus wing)                     & \SI{25e3}{\kilo\gram}\tnote{a}             \\
-..                                           & $M_\text{fuel, res}$                  & Reserve fuel mass                                     & \SI{2e3}{\kilo\gram}                       \\
-..  \textbf{Fuelburn calculation parameters} &                                       &                                                       &                                            \\
-..  \textbf{}                                & $R$                                   & Nominal range                                         & \SI{3815}{\kilo\metre}                     \\
-..  \textbf{}                                & $R_\text{climb}$                      & Climb segment range                                   & \SI{290}{\kilo\metre}                      \\
-..  \textbf{}                                & $V_\text{climb}$                      & Average climb speed                                   & $350$\si{mph}                              \\
-..                                           & $C_{D,\text{frame}}$                  & Airframe drag coefficient (fuselage + tail + nacelle) & $0.01508$\tnote{b}                         \\
-..                                           & $k_\text{tank}$                       & Assumed fraction of wingbox that can store fuel       & $0.85$                                     \\
-..                                           & $V_\text{aux}$                        & Auxilliary fuel tank volume                           & \SI{2.763}{\metre\cubed}                   \\
-..                                           & $\text{TSFC}$                         & Thrust specific fuel consumption                      & \SI{18e-6}{\kg\per\newton\second}\tnote{c} \\
-..                                           & $\rho_\text{fuel}$                    & Fuel density                                          & \SI{804}{\kilo\gram\per\metre\cubed}
 
-
-.. \input{\tablepath/FlightConditions.tex}
+.. \|put{\tablepath/FlightConditions.tex}
 
 .. table:: Flight conditions
    :name: tabFlightConditions
@@ -345,7 +358,7 @@ Design Variables
 ----------------
 
 The primary differences between the three benchmark problems are the amount of design freedom given to the optimizer through the design variables.
-\cref{tab:optProb-DVs} summarizes these design variables.
+:numref:`tabOptProb-DVs` summarizes these design variables.
 Note that, the exact number and form of some design variables will depend on the structural modeling and geometric parameterization approaches used, as is explained in the following sections.
 
 .. \input{\tablepath/DesignVariablesGeneric.tex}
@@ -415,12 +428,12 @@ However, the following requirements must be satisfied:
 Aerodynamic Variables
 ---------------------
 
-Finally, the optimizer can control the angles of attack at each flight point to meet the lift constraints described in \cref{sec:Constraints}.
+Finally, the optimizer can control the angles of attack at each flight point to meet the lift constraints described in the Constraints section.
 
 Constraints
 -----------
 
-\Cref{tab:optProb-Constraints} provides a high-level summary the constraints applied in the 3 benchmark problems.
+:numref:`tabOptProb-Constraints` provides a high-level summary the constraints applied in the 3 benchmark problems.
 As with the design variables, the exact formulation of the constraints in each benchmark problem will depend to some extent on the structural modeling and geometric parameterization approaches used by participants.
 
 Structural Constraints
@@ -478,6 +491,47 @@ This accounts for the non-uniform rate of fuel burn over the segment.
 
 .. \input{\tablepath/ConstraintsGeneric.tex}
 
+.. table:: Constraints to be enforced in the benchmark problems
+   :name: tabOptProb-Constraints
+
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`SR_\text{2.5g} \leq 1 / 1.5`                                                        | Pull-up maneuver strength ratio                | :math:`\checkmark`  | :math:`\checkmark`  | :math:`\checkmark`  |
+   +============================================================================================+================================================+=====================+=====================+=====================+
+   | :math:`SR_\text{-1g} \leq 1 / 1.5`                                                         | Push-down maneuver strength ratio              | :math:`\checkmark`  | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`\left|t_{\text{panel},i} - t_{\text{panel},j}\right| \leq` \SI{2.5}{\milli\metre}   | Skin/spar panel thickness adjacency            | :math:`\checkmark`  | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`\left|t_{\text{stiff},i} - t_{\text{stiff},j}\right| \leq` \SI{2.5}{\milli\metre}   | Skin/spar stiffener thickness adjacency        | :math:`\checkmark`  | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`\left|h_{\text{stiff},i} - h_{\text{stiff},j}\right| \leq` \SI{10}{\milli\metre}    | Skin/spar stiffener height adjacency \tnote{*} | :math:`\checkmark`  | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`t_{\text{stiff},i} \leq 15 t_{\text{panel},i}`                                      | Maximum stiffener thickness \tnote{*}          | :math:`\checkmark`  | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`h_{\text{stiff},i} \leq 30 t_{\text{stiff},i}`                                      | Maximum stiffener aspect-ratio \tnote{*}       | :math:`\checkmark`  | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`h_{\text{stiff},i} \geq 5 t_{\text{stiff},i}`                                       | Minimum stiffener aspect-ratio \tnote{*}       | :math:`\checkmark`  | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`w_{\text{stiff},i} \leq p_{\text{stiff},i}`                                         | Minimum stiffener spacing \tnote{*}            | :math:`\checkmark`  | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`L_\text{2.5g} = 2.5 LGM g`                                                          | Pull-up maneuver lift level                    | :math:`\checkmark`  | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`L_\text{-1g} = -LGM g`                                                              | Push-down maneuver lift level                  | :math:`\checkmark`  | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`L_\text{cruise} = M_\text{mid-cruise} g`                                            | Cruise maneuver lift level                     |                     | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`t_\text{spar} \geq 0.75 t_{\text{spar},0}`                                          | Minimum Spar height                            |                     | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`t \geq  0.5 t_{0}`                                                                  | Minimum TE thickness                           |                     | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`R_\text{LE} \geq 0.9 R_{\text{LE},0}`                                               | Minimum Leading edge radius                    |                     | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`M_\text{fuel}/\rho_\text{fuel} \leq V_\text{aux} + 2k_\text{tank} V_\text{wingbox}` | Fuel volume                                    |                     | :math:`\checkmark`  | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+   | :math:`TOGM / 2S \leq` \SI{600}{\kg\per\metre\squared}                                     | Maximum wing loading                           |                     |                     | :math:`\checkmark`  |
+   +--------------------------------------------------------------------------------------------+------------------------------------------------+---------------------+---------------------+---------------------+
+
+
+
 Required Results
 ================
 
@@ -489,23 +543,20 @@ These analyses should be performed using the same meshes participants use for th
 They should be performed using the baseline geometry and the following structural sizing variables on every panel:
 
 
-.. list-table:: Panel variables
+.. table:: Panel variables
    :name: tabBaselineSizing
 
-   * - **Variable**
-     - **Value** (m)
-
-   * - Stiffener Pitch 
-     - 0.15
-
-   * - Panel Thickness 
-     - 0.0065
-
-   * - Stiffener Height 
-     - 0.05
-
-   * - Stiffener Thickness 
-     - 0.006
+   +---------------------+-------------------+
+   | **Variable**        | **Value** (m)     |
+   +=====================+===================+
+   | Stiffener Pitch     | 0.15              |
+   +---------------------+-------------------+
+   | Panel Thickness     | 0.0065            |
+   +---------------------+-------------------+
+   | Stiffener Height    | 0.05              |
+   +---------------------+-------------------+
+   | Stiffener Thickness | 0.006             |
+   +---------------------+-------------------+
 
 Benchmark Aerodynamic Analysis
 ------------------------------
@@ -548,7 +599,7 @@ Case 1
 ------
 
 * Wall clock time and total number of CPU hours required for each optimization and a brief description of the hardware used.
-* Convergence plots showing the objective value along with measures of constraint violation and optimality vs iterations, function evaluations, or wall time. The criteria used to terminate the optimization should also be described. Most gradient-based optimizers report some norm of the gradient of the Lagrangian as an *Optimality* value which is used to judge satisfaction of the KKT conditions :cite:p:`Martins2022`(Section 5.3). If your optimizer does not provide such a value then you should describe the stopping criteria of your optimization.
+* Convergence plots showing the objective value along with measures of constraint violation and optimality vs iterations, function evaluations, or wall time. The criteria used to terminate the optimization should also be described. Most gradient-based optimizers report some norm of the gradient of the Lagrangian as an *Optimality* value which is used to judge satisfaction of the KKT conditions :cite:p:`Martins2022` (Section 5.3). If your optimizer does not provide such a value then you should describe the stopping criteria of your optimization.
 * Spanwise lift distribution plots for the initial and optimized designs in all flight conditions.
 * Plots of the spanwise structural sizing distributions in the upper and lower skins, and the leading and trailing edge spars. Participants should plot the equivalent axial thickness, which is the thickness of an unstiffened panel with the same axial stiffness as the stiffened panel. This can be computed as :math:`t_\text{eq} = t_\text{panel}+A_\text{stiff}/P_\text{stiff}`, where :math:`t_\text{panel}` is the panel thickness, :math:`A_\text{stiff}` is the stiffener cross-sectional area, and :math:`P_\text{stiff}` is the stiffener pitch.
 * Quantities of interest for the optimized design:
@@ -584,24 +635,24 @@ As for **Case 1** plus:
 
    Minimum required stencil for the post-optimality study.
 
+Case 3
+------
 
-.. \subsubsection{Case~3}
-.. As for Case~2 plus:
+As for **Case 2** plus:
 
-.. \begin{itemize}
-..   \item Additional quantities of interest for the optimized design:
-..         \begin{itemize}
-..           \item Wing semispan
-..           \item Wing aspect ratio
-..           \item Wing taper ratio
-..           \item Wing leading edge sweep angle
-..           \item Wing area
-..           \item Wing loading
-..         \end{itemize}
-.. \end{itemize}
+Additional quantities of interest for the optimized design:
 
-.. \section*{Acknowledgments}
-.. We would like to thank Gaetan Kenway, who originally created the simple transonic wing geometry, and Anil Yildirim for creating the supplied CFD meshes.
+* Wing semispan
+* Wing aspect ratio
+* Wing taper ratio
+* Wing leading edge sweep angle
+* Wing area
+* Wing loading
+
+Acknowledgements
+----------------
+
+We would like to thank Gaetan Kenway, who originally created the simple transonic wing geometry, and Anil Yildirim for creating the supplied CFD meshes.
 
 .. \appendix
 .. \section{Appendices}
