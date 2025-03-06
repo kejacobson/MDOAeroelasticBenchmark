@@ -2,7 +2,8 @@
 
 This directory includes:
 
-- OML and wingbox CAD files
+- OML and wingbox IGES/STEP files
+- A parametric ESP CAD model of the OML and wingbox
 - Aerodynamic and structural meshes
 - FFD control volumes
 - Geometry and aircraft specifications

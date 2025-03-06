@@ -1,0 +1,21 @@
+
+interface class in
+interface ztail in
+interface aupper in
+interface alower in
+
+# Make the Kulfan airfoil section
+
+udparg kulfan class class
+udparg kulfan ztail ztail
+udparg kulfan aupper aupper
+udprim kulfan alower alower
+
+select face
+attribute tagComp $kulfan
+ATTRIBUTE _color      "0.43922; 0.48235; 0.56078"
+
+rotatex 90 0 0
+
+end
+|||||||||
