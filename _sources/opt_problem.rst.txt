@@ -259,7 +259,12 @@ This accounts for the non-uniform rate of fuel burn over the segment.
 Buffet Onset Constraint
 =======================
 
-For case 4, a buffet onset constraint is added such that the lift at cruise has a 30\% margin to the predicted buffet onset based on the semiempirical buffet envelope model of :cite:t:`Berard2009`.
+For case 4, a buffet onset constraint is added at two conditions.
+For the high lift condition, the lift must have a 30\% margin to the predicted buffet onset condition.
+The high lift buffet condition is considered at the starting cruise mass (see the fuel burn objective computation) at Mach 0.82 and the ceiling of 37,000 ft.
+The second buffet condition is that the aircraft must be buffet free at a high speed condition.
+The high speed condition is Mach 0.89 at the ceiling of 37,000 ft with the starting cruise mass.
+Participants are free to model the buffet onset how they wish, but the semiempirical buffet envelope model of :cite:t:`Berard2009` is provided as well.
 
 .. \input{\tablepath/ConstraintsGeneric.tex}
 
@@ -303,7 +308,9 @@ For case 4, a buffet onset constraint is added such that the lift at cruise has 
    +--------------------------------------------------------------------------------------------+---------------------------------------------------------------+---------------------+---------------------+---------------------+--------------------+
    | :math:`TOGM / 2S \leq 600 \text{kg}/\text{m}^{2}`                                          | Maximum wing loading                                          |                     |                     | :math:`\checkmark`  | :math:`\checkmark` |
    +--------------------------------------------------------------------------------------------+---------------------------------------------------------------+---------------------+---------------------+---------------------+--------------------+
-   | :math:`1.3 L_\text{cruise} \leq L_\text{buffet}`                                           | Cruise buffet margin                                          |                     |                     |                     | :math:`\checkmark` |
+   | :math:`1.3 L \leq L_\text{buffet}`                                                         | Buffet onset margin - High lift condition                     |                     |                     |                     | :math:`\checkmark` |
+   +--------------------------------------------------------------------------------------------+---------------------------------------------------------------+---------------------+---------------------+---------------------+--------------------+
+   | :math:`1.0 L \leq L_\text{buffet}`                                                         | Buffet onset margin - High speed condition                    |                     |                     |                     | :math:`\checkmark` |
    +--------------------------------------------------------------------------------------------+---------------------------------------------------------------+---------------------+---------------------+---------------------+--------------------+
    | :math:`SR_\text{2.0g} \leq 1 / 1.5`                                                        | Taxi bump strength ratio (full fuel, no aerodynamics)         |                     |                     |                     | :math:`\checkmark` |
    +--------------------------------------------------------------------------------------------+---------------------------------------------------------------+---------------------+---------------------+---------------------+--------------------+
