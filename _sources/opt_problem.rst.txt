@@ -72,6 +72,10 @@ The three problems build on one another with the intention of allowing researche
    +--------------------+-------------------------+-----------------+-----------------+-------------------------------------------------+
    | Push-down Maneuver | :math:`0\,\text{m}`     | 0.458           | -1              | :math:`LGM`                                     |
    +--------------------+-------------------------+-----------------+-----------------+-------------------------------------------------+
+   | High Lift Buffet   | :math:`37000\,\text{ft}`| 0.82            | 1.3             | :math:`M_\text{cruise, start}`                  |
+   +--------------------+-------------------------+-----------------+-----------------+-------------------------------------------------+
+   | High Speed Buffet  | :math:`37000\,\text{ft}`| 0.89            | 1               | :math:`M_\text{cruise, start}`                  |
+   +--------------------+-------------------------+-----------------+-----------------+-------------------------------------------------+
 
 Objectives
 ----------
@@ -256,15 +260,23 @@ The maneuvers are assumed to be performed at the LGM since the inertial relief o
 The aircraft mass for the cruise condition is taken to be the mid-cruise mass, which is the geometric average of the cruise start and end masses.
 This accounts for the non-uniform rate of fuel burn over the segment.
 
-Buffet Onset Constraint
-=======================
+Buffet Onset Constraints
+************************
 
-For case 4, a buffet onset constraint is added at two conditions.
-For the high lift condition, the lift must have a 30\% margin to the predicted buffet onset condition.
-The high lift buffet condition is considered at the starting cruise mass (see the fuel burn objective computation) at Mach 0.82 and the ceiling of 37,000 ft.
-The second buffet condition is that the aircraft must be buffet free at a high speed condition.
-The high speed condition is Mach 0.89 at the ceiling of 37,000 ft with the starting cruise mass.
-Participants are free to model the buffet onset how they wish, but the semiempirical buffet envelope model of :cite:t:`Berard2009` is provided as well.
+For case 4, a buffet constraints are added.
+These constraints enforce that the wing must be free from buffet at a load factor of 1.3 up to its maximum operating Mach number, :math:`M_\text{MO}=0.82`, and up to the dive Mach number, :math:`M_D=0.89`, at a load factor of 1.
+As shown in :numref:`tabFlightConditions`, both these constraints are applied at the aircraft's service ceiling of :math:`37000\,\text{ft}` and at the starting cruise mass, :math:`M_\text{cruise, start}` (see the fuel burn objective computation).
+
+Participants are free to implement these buffet constraints as they wish, we provide a semi-empirical model `here <https://github.com/MDOBenchmarks/MDOAeroelasticBenchmark/tree/main/STW-Files/buffet>`_ based on the method of :cite:t:`Berard2009`.
+This model computes the buffet onset lift coefficient (:math:`C_{L_\text{buffet}}`) for a range of Mach numbers based on some basic geometric parameters of the wing.
+The constraint for both buffet conditions can then be written as:
+
+.. math::
+
+   C_{L,n} \leq C_{L_\text{buffet}}
+
+Where :math:`C_{L,n}` is the lift coefficient required to produce the necessary load factor at each buffet flight point and :math:`C{L_\text{buffet}}` is the buffet onset lift coefficient at the relevant Mach number for each flight point.
+
 
 .. \input{\tablepath/ConstraintsGeneric.tex}
 
@@ -308,9 +320,9 @@ Participants are free to model the buffet onset how they wish, but the semiempir
    +--------------------------------------------------------------------------------------------+---------------------------------------------------------------+---------------------+---------------------+---------------------+--------------------+
    | :math:`TOGM / 2S \leq 600 \text{kg}/\text{m}^{2}`                                          | Maximum wing loading                                          |                     |                     | :math:`\checkmark`  | :math:`\checkmark` |
    +--------------------------------------------------------------------------------------------+---------------------------------------------------------------+---------------------+---------------------+---------------------+--------------------+
-   | :math:`1.3 L \leq L_\text{buffet}`                                                         | Buffet onset margin - High lift condition                     |                     |                     |                     | :math:`\checkmark` |
+   | :math:`C_{L,1.3g} \leq C_{L_\text{buffet},M=0.82}`                                         | Buffet onset margin - High lift condition                     |                     |                     |                     | :math:`\checkmark` |
    +--------------------------------------------------------------------------------------------+---------------------------------------------------------------+---------------------+---------------------+---------------------+--------------------+
-   | :math:`1.0 L \leq L_\text{buffet}`                                                         | Buffet onset margin - High speed condition                    |                     |                     |                     | :math:`\checkmark` |
+   | :math:`C_{L,1g} \leq C_{L_\text{buffet},M=0.89}`                                           | Buffet onset margin - High speed condition                    |                     |                     |                     | :math:`\checkmark` |
    +--------------------------------------------------------------------------------------------+---------------------------------------------------------------+---------------------+---------------------+---------------------+--------------------+
    | :math:`SR_\text{2.0g} \leq 1 / 1.5`                                                        | Taxi bump strength ratio (full fuel, no aerodynamics)         |                     |                     |                     | :math:`\checkmark` |
    +--------------------------------------------------------------------------------------------+---------------------------------------------------------------+---------------------+---------------------+---------------------+--------------------+
